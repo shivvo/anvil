@@ -81,6 +81,25 @@ Once the LDE is fully provisioned, simply `vagrant ssh` and use the machine as y
 
 If you would like to use a GUI program such as Atom or GNOME Terminal, make sure VcXsrv is running before trying to open it from inside the LDE's bash. It might be useful to set VcXsrv as a startup task in case you use this feature frequently.
 
+## Can I skip some steps?
+
+The core functionality of this project is to create a better Windows 10 developer experience - that being said, you can strip away things you don't need or have a preferred alternative for.
+
+If you don't need an X-server for forwarded GUI programs, you can skip step 1.
+
+If you don't need a better shell, you can skip steps 1 - 5.
+
+## What about macOS/OS X?
+
+This project can be adapted to Apple operating systems fairly easily. Here are the install steps:
+1. Install **XQuartz** from [it's website](https://www.xquartz.org/)
+2. Edit your **.bashrc** in your home directory to include the following:
+    ```
+    ...
+    export DISPLAY=localhost:0
+    ...
+    ```
+3. Perform steps 6 - 10 from the install process listed above
 ## TODOS
 
 It's not possibly to create symlinks on Windows systems without special permissions. I plan on adding some more provision to handle this problem seamlessly.
