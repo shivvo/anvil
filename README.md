@@ -1,6 +1,6 @@
 # Vagrant Linux Development Environment
 
-**Work in progress** This repository will be updated with useful features as time permits.
+**Work in progress** This repository will be updated with useful features as time permits. Any and all feedback is appreciated.
 
 Often times, developers would like to easily access a Unix/Linux environment to use the vast array of tools available on those platforms. The amount of power available from those tools allows developers to learn new things, disseminate knowledge, create more useful tools and libraries, and build rock-solid software. Unfortunately, developers with a Windows 10 computer might find it more difficult to access such an environment. There are plenty of solutions out there that can ameliorate the difficulty:
    - VirtualBox - create a virtual machine to use whenever you need a Unix/Linux environment
@@ -73,3 +73,16 @@ VcXsrv allow Windows 10 to display GUI programs forwarded by the LDE using X11.
     vagrant halt
     vagrant up
     ```
+## How do I use this?
+
+Whenever after completing steps 1 - 8 of the install process, you can repeat steps 9 and 10 as often as you'd like to setup a new LDE for a new project.
+
+Once the LDE is fully provisioned, simply `vagrant ssh` and use the machine as you please. If you would like to have files on your system available to the VM, drop them into the LDE's folder - the directory is automatically shared inside the LDE at the **/vagrant** folder.
+
+If you would like to use a GUI program such as Atom or GNOME Terminal, make sure VcXsrv is running before trying to open it from inside the LDE's bash. It might be useful to set VcXsrv as a startup task in case you use this feature frequently.
+
+## TODOS
+
+It's not possibly to create symlinks on Windows systems without special permissions. I plan on adding some more provision to handle this problem seamlessly.
+
+In addition, I'll probably add some more builtin features to make the VM more versatile.
