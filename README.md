@@ -16,7 +16,7 @@ This project uses Vagrant to build a Linux Development Environment (LDE) for Win
 
 *It's possible to use an editor running inside the LDE that's forwarded using X11 to appear on the Windows desktop.
 
-These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should theoretically work on Windows 7, 8, and 8.1, but I have not tested on those platforms.
+These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should work on Windows 7, 8, and 8.1. Known differences have been accumulated in the **Install** section.
 
 ## What does this add?
 
@@ -60,6 +60,7 @@ VcXsrv allow Windows 10 to display GUI programs forwarded by the LDE using X11.
     ```
 6. Install **VirtualBox** and the **VirtualBox Extension Pack** as described by [it's website](https://www.virtualbox.org/wiki/Downloads)
 7. Install **Vagrant** from [it's website](https://www.vagrantup.com/)
+   * **Note**: On Windows 7, it's recommended to install Vagrant 1.9.6, or to upgrade PowerShell to it's most recent version before installing Vagrant's most recent version.
 8. Open your terminal (Hyper) and run the following
    ```
    vagrant plugin install vagrant-vbguest
