@@ -16,7 +16,7 @@ This project uses Vagrant to build a Linux Development Environment (LDE) for Win
 
 *It's possible to use an editor running inside the LDE that's forwarded using X11 to appear on the Windows desktop.
 
-These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should work on Windows 7, 8, and 8.1. Known differences have been accumulated in the **Install** section.
+These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should work on Windows 7, 8, and 8.1. Known differences have been accumulated in the **Install** section, based off of user feedback.
 
 ## What does this add?
 
