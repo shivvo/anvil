@@ -1,3 +1,12 @@
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+#! /bin/bash
+
+# Requires no sudo
+
+# Pull the Node.js 6 source
+curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+
+# Install Node.js 6
 sudo apt-get install -y nodejs
-sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+# Update NPM
+sudo npm install -g npm
