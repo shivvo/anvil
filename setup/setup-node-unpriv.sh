@@ -10,3 +10,7 @@ sudo bash nodesource_setup.sh
 sudo apt-get install -y nodejs
 # Update NPM
 sudo npm install -g npm
+
+# DISABLED: Will wait until a Atom-Nuclide tutorial has been set up
+# Install Nuclide - it's pretty great!
+# sudo npm install -g nuclide

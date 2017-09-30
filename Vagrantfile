@@ -22,8 +22,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "setup/setup.sh", privileged: false
 
   # Configure SSH for faster X11 forwarding
-  # config.ssh.forward_agent = true
-  # config.ssh.forward_x11 = true
-  # config.ssh.extra_args = ["-C", "-c", "aes128-gcm@openssh.com"]
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+  config.ssh.extra_args = ["-C", "-c", "aes128-gcm@openssh.com"]
 
 end
