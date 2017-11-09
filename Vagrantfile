@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Configure a private IP and use NFS for shared folders
-  # config.vm.network "private_network", ip: "192.168.99.100", nic_type: "virtio", virtualbox__intnet: true
+  config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", "/vagrant"#, type: "nfs"
 
   config.vm.provision "shell", path: "setup/update.sh"

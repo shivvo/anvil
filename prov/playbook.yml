@@ -1,0 +1,62 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Update package sources
+      command: apt-get --fix-missing update -y
+    - name: Upgrade packages
+      command: DEBIAN_FRONTEND=noninteractive apt-get --fix-missing -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+    - name: Install essential build tools
+      apt: name={{ item }}
+        with_items: 
+         - build-essential
+    - name: Install X11 Forwarding functionality
+      apt: name={{ item }} state=present
+        with_items:
+          - xauth
+          - gnome-terminal
+    - name: Install version controls
+      apt: name={{ item }} state=present
+        with_items:
+          - git
+    - name: Install build tools
+      apt: name={{ item }} state=present
+        with_items:
+          - build-essential
+    - name: Install Python 2
+      apt: name={{ item }} state=present
+      with_items:
+        - python
+        - python-pip
+        - python-dev
+    - name: Install Python 3
+      apt: name={{ item }} state=present
+        with_items:
+          - python3
+          - python3-pip
+          - python3-dev
+    - name: Install Java
+      block:
+        apt:
+          name: openjdk-8-jdk
+          state: present
+        command: sed -i '/export JAVA_HOME=\/usr\/lib\/jvm\/java-1.8.0-openjdk-amd64/ d' /home/vagrant/.bashrc
+        command: echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64" >> /home/vagrant/.bashrc
+    - name: Install Node.js 6
+      block:
+        command: curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+        command: bash nodesource_setup.sh
+        apt: 
+          name: nodejs
+        npm:
+          name: npm
+          global: yes
+    - name: Install OCaml
+      block:
+        apt: name={{ item }}
+          with_items:
+            - m4
+            - opam
+        command: opam init -a -y --comp 4.05.0
+          become_method: false
