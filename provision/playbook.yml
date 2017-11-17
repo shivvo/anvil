@@ -27,6 +27,7 @@
       - opam
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
+
   tasks:
     
     - name: Update and upgrade packages
@@ -34,8 +35,12 @@
         - apt:
             name: aptitude
             state: present
+        - shell: |
+            rm -rf /var/lib/apt/lists/*
+        - shell: |
+            apt-get clean
         - apt:
-            upgrade: yes
+            upgrade: full
             update_cache: yes
 
     - name: Install build tools
@@ -43,11 +48,16 @@
         name: "{{ build_tools }}" 
         state: present 
     
-    # - name: Install X11 Forwarding functionality
-    #   apt: 
-    #     name: "{{ x11_forwarding }}"
-    #     state: present 
-    
+    - name: Install X11 Forwarding functionality
+      # Should work, but doesn't
+      # apt: 
+      #   name: "{{ x11_forwarding }}"
+      #   state: present
+      shell: |
+        apt install -y xauth gnome-terminal
+      become: yes
+      ignore_errors: yes
+
     - name: Install version controls
       apt: 
         name: "{{ version_control }}"
@@ -68,19 +78,21 @@
         name: "{{ java8 }}"
         state: present
 
-    # - name: Install Node.js 6
-    #   block:
-    #     command: curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-    #     command: bash nodesource_setup.sh
-    #     apt: 
-    #       name: nodejs
-    #       state: present
-    #       update_cache: yes
-    #     npm:
-    #       name: npm
-    #       global: yes
-    #   become_method: sudo     
-
+    - name: Install Node.js 6
+      block:
+        - shell: |
+            curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+        - shell: |
+            bash nodesource_setup.sh
+        - shell: |
+            rm -f nodesource_setup.sh
+        - apt: 
+            name: nodejs
+            state: present
+        - npm:
+            name: npm
+            global: yes
+          
     - name: Install OCaml
       block:
         - apt: 
