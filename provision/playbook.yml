@@ -1,69 +1,94 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    build_tools:
+      - build-essential
+      - cmake
+      - ant
+      - maven
+    x11_forwarding:
+      - xauth
+      - gnome-terminal
+    version_control:
+      - git
+    python2:
+      - python
+      - python-pip
+      - python-dev
+    python3:
+      - python3
+      - python3-pip
+      - python3-dev
+    java8:
+      - openjdk-8-jdk
+    ocaml:
+      - m4
+      - opam
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
   tasks:
-    - name: Update package sources
-      command: apt --fix-missing update -y
-    - name: Upgrade packages
-      command: DEBIAN_FRONTEND=noninteractive apt --fix-missing -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+    
+    - name: Update and upgrade packages
+      block:
+        - apt:
+            name: aptitude
+            state: present
+        - apt:
+            upgrade: yes
+            update_cache: yes
+
     - name: Install build tools
-      apt: name={{ item }} state=present update_cache=yes
-        with_items: 
-         - build-essential
-         - cmake
-         - ant
-         - maven
-    - name: Install X11 Forwarding functionality
-      apt: name={{ item }} state=present update_cache=yes
-        with_items:
-          - xauth
-          - gnome-terminal
+      apt: 
+        name: "{{ build_tools }}" 
+        state: present 
+    
+    # - name: Install X11 Forwarding functionality
+    #   apt: 
+    #     name: "{{ x11_forwarding }}"
+    #     state: present 
+    
     - name: Install version controls
-      apt: name={{ item }} state=present update_cache=yes
-        with_items:
-          - git
-    - name: Install build tools
-      apt: name={{ item }} state=present update_cache=yes
-        with_items:
-          - build-essential
+      apt: 
+        name: "{{ version_control }}"
+        state: present
+    
     - name: Install Python 2
-      apt: name={{ item }} state=present update_cache=yes
-        with_items:
-          - python
-          - python-pip
-          - python-dev
+      apt: 
+        name: "{{ python2 }}"
+        state: present
+        
     - name: Install Python 3
-      apt: name={{ item }} state=present update_cache=yes
-        with_items:
-          - python3
-          - python3-pip
-          - python3-dev
+      apt: 
+        name: "{{ python3 }}" 
+        state: present
+        
     - name: Install Java
-      block:
-        apt:
-          name: openjdk-8-jdk
-          state: present
-          update_cache: yes
-        command: sed -i '/export JAVA_HOME=\/usr\/lib\/jvm\/java-1.8.0-openjdk-amd64/ d' /home/vagrant/.bashrc
-        command: echo "export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64" >> /home/vagrant/.bashrc
-    - name: Install Node.js 6
-      block:
-        command: curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-        command: bash nodesource_setup.sh
-        apt: 
-          name: nodejs
-          state: present
-          update_cache: yes
-        npm:
-          name: npm
-          global: yes
-      become_method: sudo     
+      apt:
+        name: "{{ java8 }}"
+        state: present
+
+    # - name: Install Node.js 6
+    #   block:
+    #     command: curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
+    #     command: bash nodesource_setup.sh
+    #     apt: 
+    #       name: nodejs
+    #       state: present
+    #       update_cache: yes
+    #     npm:
+    #       name: npm
+    #       global: yes
+    #   become_method: sudo     
+
     - name: Install OCaml
       block:
-        apt: name={{ item }}
-          with_items:
-            - m4
-            - opam
-        command: opam init -a -y --comp 4.05.0
-        command: eval `opam config env`
-        command: opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
+        - apt: 
+            name: "{{ ocaml }}"
+            state: present
+        - shell: | 
+            opam init -a -y --comp 4.05.0
+        - shell: |
+            eval `opam config env`
+        - shell: |
+            opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
