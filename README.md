@@ -18,41 +18,15 @@ These goals are based off my experience writing side projects and as an undergra
 
 ## What does this add?
 
-This project aims to add to following to your Windows computer:
+This project aims to add (at minimum) to following to your Windows computer:
    - VirtualBox - for running your LDE inside a virtual machine
    - Vagrant - to provision your LDE and manage some startup tasks
-   - Hyper - a shell built with JavaScript, CSS, HTML, and Electron
-   - Git for Windows - git is always useful, but this comes with a handy bash shell, too
    - VcXsrv - a Windows X-server based on the xorg sources
 
 VirtualBox and Vagrant together build virtual machines where fine-tuning development environments can be kept separate from your main operating system install. Hyper and Git for Windows together can build a versatile bash shell that supercedes Command Prompt. VcXsrv allow Windows to display GUI programs running from within the LDE using X11 forwarding.
 
 ## Install
 1. Install **VcXsrv** from [it's website](https://sourceforge.net/projects/vcxsrv/).
-2. Install **Git for Windows** from [it's website](https://git-scm.com/download/win). As you click through the installer, be sure to select the following options:
-   * Select the option **Use Git from Git Bash only** when it comes up.
-   * Select the option **Use the OpenSSL library** when it comes up.
-   * Select the option **Checkout as-is, commit as-is** when it comes up.
-      * This means you'll have to make sure to develop with Unix line endings when working on a Git repo on Windows. While this adds some extra setuo overhead, errors relating to line endings inside the LDE will be minimized (and those are a lot tougher to handle). 
-   * Select the option **Use MinTTY (the default terminal of MSYS2)** when it comes up.
-3. Install **Hyper** from [it's website](https://hyper.is/).
-4. Configure Hyper to launch a bash shell.
-   * In your editor, open the **.hyper.js** file living in your home directory (e.g. C:\Users\shivr).
-   * Edit the **shell** and **shellArgs** parameters in *.hyper.js*:
-    ```
-    ...
-    shell: 'C:\\Program Files\\Git\\git-cmd.exe',
-    ...
-    shellArgs: ['--command=usr/bin/bash.exe', '-l', '-i'],
-    ...
-    ```
-5. Configure the bash shell.
-   * Open or create a **.bashrc** file in your home directory.
-   * Add these contents (mandatory):
-    ```
-    export TERM=cygwin
-    export DISPLAY=localhost:0
-    ```
 6. Install **VirtualBox** and the **VirtualBox Extension Pack** from [it's website](https://www.virtualbox.org/wiki/Downloads)
 7. Install **Vagrant** from [it's website](https://www.vagrantup.com/)
    * **Note**: On Windows 7, Vagrant will hang during usage if PowerShell is not up to date. There's two options to alleviate the issue

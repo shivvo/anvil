@@ -49,12 +49,12 @@
         state: present 
     
     - name: Install X11 Forwarding functionality
-      # Should work, but doesn't
+      # Should work, but doesn't :(
       # apt: 
       #   name: "{{ x11_forwarding }}"
       #   state: present
       shell: |
-        apt install -y xauth gnome-terminal
+        apt --fix-missing install -y xauth gnome-terminal
       become: yes
       ignore_errors: yes
 
