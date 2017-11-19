@@ -18,13 +18,14 @@ These goals are based off my experience writing side projects and as an undergra
 
 ## What does this add?
 
-This project aims to add (at minimum) to following to your Windows computer:
+This project adds (at minimum) to following to your Windows computer:
    - VirtualBox - for running your LDE inside a virtual machine
    - Vagrant - to provision your LDE and manage some startup tasks
 
 VirtualBox and Vagrant together build virtual machines where fine-tuning development environments can be kept separate from your main operating system install.
 
 ## Install
+
 1. Install **VirtualBox** and the **VirtualBox Extension Pack** from [it's website](https://www.virtualbox.org/wiki/Downloads)
 2. Install **Vagrant** from [it's website](https://www.vagrantup.com/)
    * **Note**: On Windows 7, Vagrant will hang during usage if PowerShell is not up to date. There's two options to alleviate the issue
@@ -44,12 +45,10 @@ VirtualBox and Vagrant together build virtual machines where fine-tuning develop
 
 ## How do I use this?
 
-After completing steps 1 - 8 of the install process, you can repeat steps 9 and 10 as often as you'd like to setup a new LDE for a new project.
+After completing steps 1 - 3 of the install process, you can repeat steps 4 and 5 as often as you'd like to setup a new LDE for a new project.
 
 Once the LDE is fully provisioned, simply `vagrant ssh` and use the machine as you please. If you would like to have files on your system available to the VM, drop them into the LDE's folder - the directory is automatically shared inside the LDE at the **/vagrant** folder.
 
-If you would like to use a GUI program such as Atom or GNOME Terminal, make sure VcXsrv is running before trying to open it from inside the LDE's bash. It might be useful to set VcXsrv as a startup task in case you use this feature frequently.
+## Extra functionality
 
-## TODOS
-
-It's not possibly to create symlinks on Windows systems without special permissions. I plan on adding some more provision to handle this problem seamlessly.
+Look in the **extra** folder for guides on how to setup some extra features for your LDE.
