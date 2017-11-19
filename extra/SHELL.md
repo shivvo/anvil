@@ -1,6 +1,6 @@
 # Bash Terminals
 
-The default terminals in Windows 10 (Command Prompt, PowerShell) might not suit your needs as a developer who works mostly in a Linux environemnt. There are some alternative Bash terminal emulators that provide a Bash-like environment in Windows 10 (outside of Bash on Windows).
+The default terminals in Windows 10 (Command Prompt, PowerShell) might not suit your needs as a developer who works mostly in a Linux environment. There are alternative terminals that provide a Bash-like environment in Windows 10 (other than Bash on Windows).
 
 ## Hyper and Git
 

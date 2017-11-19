@@ -11,7 +11,12 @@ Any LDE can install the client software, and an X11 server implementation is ava
    ```
    export DISPLAY=localhost:0
    ```
-4. Inside your LDE, install `xauth` and `gnome-terminal`. Remember, use `vagrant ssh` to SSH into your LDE.
+4. Inside your LDE, install X11 software and a Bash terminal.
+   * SSH into your LDE
+   ```
+   vagrant ssh
+   ```
+   * Install packages for X11 forwarding, and GNOME Terminal
    ```
    sudo apt install -y xauth gnome-terminal
    ```
