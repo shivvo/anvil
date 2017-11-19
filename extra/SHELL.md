@@ -18,16 +18,16 @@ Hyper is a minimal shell developed with JavaScript, HTML and CSS. Although the s
 3. Configure Hyper to launch a bash shell.
    * In your editor, open the **.hyper.js** file living in your home directory (e.g. C:\Users\shivr).
    * Edit the **shell** and **shellArgs** parameters in *.hyper.js*:
-    ```
-    ...
-    shell: 'C:\\Program Files\\Git\\git-cmd.exe',
-    ...
-    shellArgs: ['--command=usr/bin/bash.exe', '-l', '-i'],
-    ...
-    ```
+      ```
+      ...
+      shell: 'C:\\Program Files\\Git\\git-cmd.exe',
+      ...
+      shellArgs: ['--command=usr/bin/bash.exe', '-l', '-i'],
+      ...
+      ```
 4. Configure the bash shell.
    * Open or create a **.bashrc** file in your home directory.
    * Add these contents (mandatory):
-    ```
-    export TERM=cygwin
-    ```
+      ```
+      export TERM=cygwin
+      ```
