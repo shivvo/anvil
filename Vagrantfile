@@ -9,19 +9,25 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
     vb.cpus = 2
 
-    vb.customize ["modifyvm", :id, "--ioapic", "on"]
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    # Enable faster performance - found these online :)
+    #vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    #vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    #vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
   # Configure a private IP and use NFS for shared folders
-  # config.vm.network "private_network", ip: "192.168.99.100", nic_type: "virtio", virtualbox__intnet: true
+  config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", "/vagrant"#, type: "nfs"
 
-  config.vm.provision "shell", path: "setup/update.sh"
-  config.vm.provision "shell", path: "setup/setup.sh", privileged: false
+  # Provision the machine
+  #config.vm.provision "shell", path: "setup/update.sh"
+  #config.vm.provision "shell", path: "setup/setup.sh", privileged: false
 
-  # Configure SSH for faster X11 forwarding
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provision/playbook.yml"
+  end
+
+  # Configure SSH for X11 forwarding
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
