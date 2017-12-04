@@ -20,9 +20,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"#, type: "nfs"
 
   # Provision the machine
-  #config.vm.provision "shell", path: "setup/update.sh"
-  #config.vm.provision "shell", path: "setup/setup.sh", privileged: false
-
   config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "provision/playbook.yml"
   end

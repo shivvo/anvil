@@ -4,7 +4,7 @@ The default terminals in Windows 10 (Command Prompt, PowerShell) might not suit 
 
 ## Hyper and Git
 
-Hyper is a minimal shell developed with JavaScript, HTML and CSS. Although the startup time is occasionally slow, it does its job well, is easily customizable, and (with Unix tools integrated) a solid Bash terminal. Git is a powerful version control tool, and optionally comes with Unix command line utilities that can be used on Windows 10. With Git and Unix tools integrated into terminal, you'll be able to navigate Windows 10 mostly as you would a Linux system.
+Hyper is a minimal shell developed with JavaScript, HTML and CSS. Although the startup time is occasionally slow, it does its job well, is easily customizable, and (with Unix tools integrated) a solid Bash terminal. Git is a powerful version control tool, and optionally comes with Unix command line utilities that can be used on Windows 10. With Git and Unix tools integrated into Hyper, you'll be able to navigate Windows 10 mostly as you would a Linux system.
 
 ### Install
 

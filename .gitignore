@@ -1,5 +1,3 @@
 .git
 .vagrant
-setup/nodesource_setup.sh
-setup/npm-debug.log
 provision/*.retry
