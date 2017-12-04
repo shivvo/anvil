@@ -3,6 +3,10 @@
   become: yes
   vars:
     build_tools:
+      - autoconf
+      - automake
+      - libtool
+      - pkg-config
       - build-essential
       - cmake
       - ant
@@ -29,7 +33,7 @@
     JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
 
   tasks:
-    
+
     - name: Update and upgrade packages
       block:
         - apt:
@@ -44,35 +48,34 @@
             update_cache: yes
 
     - name: Install build tools
-      apt: 
-        name: "{{ build_tools }}" 
-        state: present 
-    
+      apt:
+        name: "{{ build_tools }}"
+        state: present
+
+      # This isn't working - errors are ignored for now
     - name: Install X11 Forwarding functionality
       # Should work, but doesn't :(
-      # apt: 
-      #   name: "{{ x11_forwarding }}"
-      #   state: present
-      shell: |
-        apt --fix-missing install -y xauth gnome-terminal
+      apt:
+        name: "{{ x11_forwarding }}"
+        state: present
       become: yes
       ignore_errors: yes
 
     - name: Install version controls
-      apt: 
+      apt:
         name: "{{ version_control }}"
         state: present
-    
+
     - name: Install Python 2
-      apt: 
+      apt:
         name: "{{ python2 }}"
         state: present
-        
+
     - name: Install Python 3
-      apt: 
-        name: "{{ python3 }}" 
+      apt:
+        name: "{{ python3 }}"
         state: present
-        
+
     - name: Install Java
       apt:
         name: "{{ java8 }}"
@@ -82,23 +85,34 @@
       block:
         - shell: |
             curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
-        - shell: |
             bash nodesource_setup.sh
-        - shell: |
             rm -f nodesource_setup.sh
-        - apt: 
+        - apt:
             name: nodejs
             state: present
         - npm:
             name: npm
             global: yes
-          
+        - npm:
+            name: nuclide
+            global: yes
+        - shell: |
+            git clone https://github.com/facebook/watchman.git
+            cd watchman
+            git checkout v4.9.0
+            ./autogen.sh
+            ./configure
+            make
+            make install
+            cd ..
+            rm -rf watchman
+
     - name: Install OCaml
       block:
-        - apt: 
+        - apt:
             name: "{{ ocaml }}"
             state: present
-        - shell: | 
+        - shell: |
             opam init -a -y --comp 4.05.0
         - shell: |
             eval `opam config env`
