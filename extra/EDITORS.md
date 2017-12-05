@@ -69,11 +69,12 @@ SSHFS is not native to Windows 10, but some saintly developers have ported [FUSE
 2. In File Explorer, right click on "This PC" and click "Map network drive.."
 3. To mount a remote folder with SSHFS, type in the *Folder* field:
    ```
-   \\sshfs\vagrant@[host]\[folder]
+   \\sshfs\[local]=vagrant@[host]\[folder]
    ```
+   * The `local` is the local user (the one you're signed into on the host machine).
    * The `host` is the IP address assigned by DHCP.
    * Optionally, the `folder` is the path of the project you'd like to mount relative to the Vagrant home directory in your LDE.
-   * For example, consider an LDE with DHCP-assigned IP 172.28.128.3 and a project living at `/home/vagrant/foobar`. You'd put `\\sshfs\vagrant@172.28.128.3\foobar` in the *Folder* field of the dialog.
+   * For example, consider a Windows 10 user `shivr` who has an LDE with DHCP-assigned IP 172.28.128.3 and a project living at `/home/vagrant/foobar`. You'd put `\\sshfs\shivr=vagrant@172.28.128.3\foobar` in the *Folder* field of the dialog.
    * To mount the Vagrant home directory, you can leave out `folder` and the trailing slash.
 4. Click Finish. Enter the password to your LDE ("vagrant") when asked.
 
