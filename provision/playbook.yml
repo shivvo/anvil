@@ -2,12 +2,17 @@
 - hosts: all
   become: yes
   vars:
+    xfce:
+      - gdm
+      - xfce4
+      - xfce4-goodies
     build_tools:
       - autoconf
       - automake
       - libtool
       - pkg-config
       - build-essential
+      - valgrind
       - cmake
       - ant
       - maven
@@ -47,19 +52,20 @@
             upgrade: full
             update_cache: yes
 
+    # - name: Install XFCE desktop environment
+    #   apt:
+    #     name: "{{ xfce }}"
+    #     state: present
+
+    - name: Install X11 Forwarding functionality
+      apt:
+        name: "{{ x11_forwarding }}"
+        state: present
+
     - name: Install build tools
       apt:
         name: "{{ build_tools }}"
         state: present
-
-      # This isn't working - errors are ignored for now
-    - name: Install X11 Forwarding functionality
-      # Should work, but doesn't :(
-      apt:
-        name: "{{ x11_forwarding }}"
-        state: present
-      become: yes
-      ignore_errors: yes
 
     - name: Install version controls
       apt:
