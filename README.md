@@ -104,13 +104,13 @@ Some applications can take advantage X11 forwarding, a feature of some Linux sys
 Any LDE can install the client software, and an X11 server implementation is available on Windows 10.
 
 ### Install
-1. Install some Bash terminal from [one of these options](SHELL.md), or one of your own.
+1. Install some Bash terminal (maybe an option listed above).
 2. Install **VcXsrv** from [it's website](https://sourceforge.net/projects/vcxsrv/).
 3. Add the following line to your `.bashrc`
    ```
    export DISPLAY=localhost:0
    ```
-4. Inside your LDE, install X11 software and a Bash terminal.
+4. Inside your LDE, if it isn't there already, install the X11 software and a Bash terminal.
    * SSH into your LDE
    ```
    vagrant ssh
