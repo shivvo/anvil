@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
 
     # Enable GUI
-    vb.gui = true
+    #vb.gui = true
 
     # Enable faster performance - found these online :)
     #vb.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -27,7 +27,8 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "provision/playbook.yml"
   end
 
-  config.vm.provision "shell", inline: "systemctl start gdm", run: "always"
+  # Start login manager upon booting up
+  #config.vm.provision "shell", inline: "systemctl start gdm", run: "always"
 
   # Configure SSH for X11 forwarding
   config.ssh.forward_agent = true
