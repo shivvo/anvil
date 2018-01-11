@@ -1,0 +1,16 @@
+---
+- hosts: all
+  vars:
+    xfce:
+      - gdm
+      - xfce4
+      - xfce4-goodies
+  tasks:
+    - name: Install XFCE
+      apt:
+        name: "{{ xfce }}"
+        state: present
+    - name: Enable GDM as login manager
+      systemd:
+        name: gdm
+        enabled: yes
