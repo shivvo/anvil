@@ -20,13 +20,16 @@ Vagrant.configure("2") do |config|
   end
 
   # Enable XFCE
+=begin
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
+    vb.customize ["modifyvm", :id, "--vram", "256"]
   end
 
   config.vm.provision "desktop", type: "ansible_local" do |ansible|
     ansible.playbook = "provision/desktop.yml"
   end
+=end
 
   # Configure SSH for X11 forwarding
   config.ssh.forward_agent = true

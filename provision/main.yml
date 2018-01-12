@@ -79,38 +79,38 @@
         name: "{{ java8 }}"
         state: present
 
-    - name: Install Node.js 8
-      block:
-        - shell: |
-            curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-            bash nodesource_setup.sh
-            rm -f nodesource_setup.sh
-        - apt:
-            name: nodejs
-            state: present
-        - npm:
-            name: npm
-            global: yes
-        - npm:
-            name: nuclide
-            global: yes
-        - shell: |
-            git clone https://github.com/facebook/watchman.git
-            cd watchman
-            git checkout v4.9.0
-            ./autogen.sh
-            ./configure
-            make
-            make install
-            cd ..
-            rm -rf watchman
+    # - name: Install Node.js 8
+    #   block:
+    #     - shell: |
+    #         curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+    #         bash nodesource_setup.sh
+    #         rm -f nodesource_setup.sh
+    #     - apt:
+    #         name: nodejs
+    #         state: present
+    #     - npm:
+    #         name: npm
+    #         global: yes
+    #     - npm:
+    #         name: nuclide
+    #         global: yes
+    #     - shell: |
+    #         git clone https://github.com/facebook/watchman.git
+    #         cd watchman
+    #         git checkout v4.9.0
+    #         ./autogen.sh
+    #         ./configure
+    #         make
+    #         make install
+    #         cd ..
+    #         rm -rf watchman
 
-    - name: Install OCaml
-      block:
-        - apt:
-            name: "{{ ocaml }}"
-            state: present
-        - shell: |
-            opam init -a -y --comp 4.05.0
-            eval `opam config env`
-            opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
+    # - name: Install OCaml
+    #   block:
+    #     - apt:
+    #         name: "{{ ocaml }}"
+    #         state: present
+    #     - shell: |
+    #         opam init -a -y --comp 4.05.0
+    #         eval `opam config env`
+    #         opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
