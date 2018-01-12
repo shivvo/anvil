@@ -64,4 +64,4 @@ Some of the disabled tasks in the `main.yml` playbook can install:
 
 ## Doodads
 
-Check out the *doodads* folder to see what else your LED can do!
+Check out the [doodads](doodads) folder to see what else your LED can do!
