@@ -61,3 +61,7 @@ The Ansible playbook used to provision the LED can install several build tools, 
 Some of the disabled tasks in the `main.yml` playbook can install:
 * Node.js 8 and NPM, with Nuclide support
 * OCaml and OPAM
+
+## Doodads
+
+Check out the *doodads* folder to see what else your LED can do!

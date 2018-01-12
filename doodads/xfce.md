@@ -8,11 +8,12 @@ In case you need your LED to have a full desktop environment, the Ansible playbo
 
 1. In your Vagrantfile, uncomment the following lines:
    ```
+   # Enable XFCE
    config.vm.provider "virtualbox" do |vb|
      vb.gui = true
    end
 
-   config.vm.provision "ansible_local" do |ansible|
+   config.vm.provision "desktop", type: "ansible_local" do |ansible|
      ansible.playbook = "provision/desktop.yml"
    end
    ...

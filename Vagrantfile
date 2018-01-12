@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
 
   config.vm.box = "bento/ubuntu-16.04"
@@ -18,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant"#, type: "nfs"
 
   # Provision the machine
-  config.vm.provision "ansible_local" do |ansible|
+  config.vm.provision "main", type: "ansible_local" do |ansible|
     ansible.playbook = "provision/main.yml"
   end
 
@@ -27,7 +24,7 @@ Vagrant.configure("2") do |config|
     vb.gui = true
   end
 
-  config.vm.provision "ansible_local" do |ansible|
+  config.vm.provision "desktop", type: "ansible_local" do |ansible|
     ansible.playbook = "provision/desktop.yml"
   end
 
