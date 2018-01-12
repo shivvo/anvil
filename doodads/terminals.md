@@ -12,7 +12,7 @@ Hyper is a minimal shell developed with JavaScript, HTML and CSS. Although the s
    * Select the option **Use Git from Git Bash only** when it comes up.
    * Select the option **Use the OpenSSL library** when it comes up.
    * Select the option **Checkout as-is, commit as-is** when it comes up.
-      * This means you'll have to make sure to develop with Unix line endings when working on a Git repo on Windows. While this adds some extra setup overhead, errors relating to line endings inside the LDE will be minimized (and those are a lot tougher to handle). 
+      * This means you'll have to make sure to develop with Unix line endings when working on a Git repo on Windows. While this adds some extra setup overhead, errors relating to line endings inside the LED will be minimized (and those are a lot tougher to handle). 
    * Select the option **Use MinTTY (the default terminal of MSYS2)** when it comes up.
 2. Install **Hyper** from [it's website](https://hyper.is/).
 3. Configure Hyper to launch a bash shell.
