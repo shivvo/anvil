@@ -2,20 +2,35 @@
 - hosts: all
   become: yes
   vars:
-    x11_forwarding:
+    feature_enabled:
+      desktop_forwarding: yes
+      build_tools: yes
+      debug_tools: yes
+      version_control_tools: yes
+      python2: yes
+      python3: yes
+      java8: yes
+      nodejs: yes
+      ocaml: yes
+      xfce: yes
+    desktop_forwarding:
       - xauth
       - gnome-terminal
+      - x11vnc
+      - xvfb
+      - vnc4server
+      - openssh-server
     build_tools:
       - autoconf
       - automake
       - libtool
       - pkg-config
       - build-essential
-      - valgrind
       - cmake
-      - ant
-      - maven
-    version_control:
+    debug_tools:
+      - valgrind
+      - nmap
+    version_control_tools:
       - git
     python2:
       - python
@@ -30,12 +45,19 @@
     ocaml:
       - m4
       - opam
+    xfce:
+      - gdm
+      - xfce4
+      - xfce4-goodies
   
   environment:
     JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
 
   tasks:
-
+    ###############################
+    # Update and upgrade packages #
+    ###############################
+    
     - name: Update and upgrade packages
       block:
         - apt:
@@ -49,68 +71,124 @@
             upgrade: full
             update_cache: yes
 
-    - name: Install X11 forwarding
+    ########################
+    # Install useful tools #
+    ########################
+    
+    # Desktop forwarding
+    - name: Install desktop forwarding
       apt:
-        name: "{{ x11_forwarding }}"
+        name: "{{ desktop_forwarding }}"
         state: present
-
+      when: 
+        - feature_enabled.desktop_forwarding
+    
+    # Build tools
     - name: Install build tools
       apt:
         name: "{{ build_tools }}"
         state: present
-
-    - name: Install version control systems
+      when:
+        - feature_enabled.build_tools
+    
+    # Debug tools
+    - name: Install debug tools
       apt:
-        name: "{{ version_control }}"
+        name: "{{ debug_tools }}"
         state: present
+      when:
+        - feature_enabled.debug_tools
 
+    # Version control tools
+    - name: Install version control tools
+      apt:
+        name: "{{ version_control_tools }}"
+        state: present
+      when:
+        - feature_enabled.version_control_tools
+
+    ##########################################
+    # Programming languages and technologies #
+    ##########################################
+
+    # Python 2
     - name: Install Python 2
       apt:
         name: "{{ python2 }}"
         state: present
+      when:
+        - feature_enabled.python2
 
+    # Python 3
     - name: Install Python 3
       apt:
         name: "{{ python3 }}"
         state: present
+      when:
+        - feature_enabled.python3
 
-    - name: Install Java
+    # Java 8
+    - name: Install Java 8
       apt:
         name: "{{ java8 }}"
         state: present
+      when:
+        - feature_enabled.java8
 
-    # - name: Install Node.js 8
-    #   block:
-    #     - shell: |
-    #         curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-    #         bash nodesource_setup.sh
-    #         rm -f nodesource_setup.sh
-    #     - apt:
-    #         name: nodejs
-    #         state: present
-    #     - npm:
-    #         name: npm
-    #         global: yes
-    #     - npm:
-    #         name: nuclide
-    #         global: yes
-    #     - shell: |
-    #         git clone https://github.com/facebook/watchman.git
-    #         cd watchman
-    #         git checkout v4.9.0
-    #         ./autogen.sh
-    #         ./configure
-    #         make
-    #         make install
-    #         cd ..
-    #         rm -rf watchman
+    # Node.js 8
+    - name: Install Node.js 8
+      block:
+        - shell: |
+            curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+            bash nodesource_setup.sh
+            rm -f nodesource_setup.sh
+        - apt:
+            name: nodejs
+            state: present
+        - npm:
+            name: npm
+            global: yes
+        - npm:
+            name: nuclide
+            global: yes
+        - shell: |
+            git clone https://github.com/facebook/watchman.git
+            cd watchman
+            git checkout v4.9.0
+            ./autogen.sh
+            ./configure
+            make
+            make install
+            cd ..
+            rm -rf watchman
+      when:
+        - feature_enabled.nodejs
 
-    # - name: Install OCaml
-    #   block:
-    #     - apt:
-    #         name: "{{ ocaml }}"
-    #         state: present
-    #     - shell: |
-    #         opam init -a -y --comp 4.05.0
-    #         eval `opam config env`
-    #         opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
+    # OCaml 4.05.0
+    - name: Install OCaml
+      block:
+        - apt:
+            name: "{{ ocaml }}"
+            state: present
+        - shell: |
+            opam init -a -y --comp 4.05.0
+            eval `opam config env`
+            opam install -y utop ounit qtest yojson lwt menhir ansiterminal lambda-term coq.8.6.1
+      when:
+        - feature_enabled.ocaml
+    
+    ###############################################
+    # Graphical desktop environment and utilities #
+    ###############################################
+
+    # XFCE and GDM
+    - name: Install XFCE
+      block:
+        - apt:
+            name: "{{ xfce }}"
+            state: present
+        - systemd:
+            name: gdm
+            enabled: yes
+      when:
+        - feature_enabled.xfce
