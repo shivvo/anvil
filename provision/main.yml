@@ -10,9 +10,9 @@
       python2: yes
       python3: yes
       java8: yes
-      nodejs: yes
-      ocaml: yes
-      xfce: yes
+      nodejs: no
+      ocaml: no
+      xfce: no
     desktop_forwarding:
       - xauth
       - gnome-terminal
