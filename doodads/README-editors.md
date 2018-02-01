@@ -6,7 +6,7 @@ There are some tools that enable remote development on Windows 10. This allows u
 
 ## First Step: Set up a Private Network
 
-To take advantage of remote development, your LED will need an IP address accessible to the network you're on. You'll need to enable a Vagrant private network, which will give your LED an IP address accessible within the network you're on, but not to the public internet. The IP address will be assigned by DHCP - this eliminates the hassle of finding an available address, but means you'll have to check your LED's IP address after booting it up.
+To take advantage of remote development, your LED will need an IP address accessible to the network you're on. You'll need to enable a Vagrant private network, which will give your LED an IP address accessible from your host machine (laptop). The IP address will be assigned by DHCP - this eliminates the hassle of finding an available address, but means you'll have to check your LED's IP address after booting it up.
 
 ### Install
 1. Enable your LED's private network to get an IP address assigned by DHCP.
@@ -22,7 +22,7 @@ To take advantage of remote development, your LED will need an IP address access
    ```
    ifconfig
    ```
-   * The IP address you're looking for will be listed, under one of the network interfaces. Usually, there's a loopback interface and one with IP address 10.0.X.X - the third is probably the one with the IP address assigned by DHCP.
+   * The IP address you're looking for will be listed, under one of the network interfaces. Usually, there's a loopback interface and one with IP address 10.0.X.X - one of the other options is probably the one with the IP address assigned by DHCP.
 
 You can use step 2 to refer back to the IP address - it will be used in most remote development tools to connect to your LED.
 

@@ -8,8 +8,8 @@ Often times, developers would like to easily access a Unix/Linux environment to 
 * Cygwin - a collection of GNU and open source tools which provide functionality similar to a Linux distribution, plus a POSIX emulation layer
 * Windows Subsystem for Linux (Bash on Windows) - an implementation of Linux syscalls by Microsoft in order to run a full Linux bash
 
-Each of these options has pros and cons, and probably the most preferred option is Bash on Windows. The danger, however, is that since i;ts a work-in-progress by Microsoft, there's always a chance that it won't have the functionality a developer might need - simply because the Linux syscall hasn't been implemented yet. 
-d
+Each of these options has pros and cons, and probably the most preferred option is Bash on Windows. The danger, however, is that since it's a work-in-progress by Microsoft, there's always a chance that it won't have the functionality a developer might need - simply because the Linux syscall hasn't been implemented yet. 
+
 This project uses Vagrant to build Linux Environments for Development (LEDs) for Windows 10 users and makes use of other open source tools to create a smooth workflow. It's streamlined for a workflow where:
 * the user writes code using a text editor directly on Windows
 * the user can use Linux tools inside Vagrant to compile their code or perform other tasks
@@ -50,17 +50,18 @@ Once the LED is fully provisioned, simply `vagrant ssh` and use the machine as y
 
 ## What comes with it?
 
-The Ansible playbook used to provision the LED can install several build tools, version control tools, and utilities. Not all of them are enabled, but can be by uncommenting the corresponding task in the playbook. By default, the Ansible playbook:
+The Ansible playbook used to provision the LED can install several build tools, version control tools, and utilities. Not all of them are enabled, but can be by enabling the feature under the `feature_enabled` section of the playbook. By default, the Ansible playbook:
 
 * updates package sources and upgrades installed packages
-* sets up X11 forwarding and installs GNOME Terminal
+* sets up desktop forwarding and installs GNOME Terminal
 * installs commonly used build tools (`build-essential`, `cmake`, etc.)
-* installs commonly used version control tools (`git`, `subversion`, etc.)
+* installs commonly used version control tools (`git`, etc.)
 * installs Python 2, Python 3, and Java
 
 Some of the disabled tasks in the `main.yml` playbook can install:
 * Node.js 8 and NPM, with Nuclide support
 * OCaml and OPAM
+* XFCE desktop environment with GDM login manager
 
 ## Doodads
 
