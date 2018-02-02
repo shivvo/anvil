@@ -11,8 +11,8 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--vram", "256"]
   end
 
-  # Configure a private IP and shared folders
-  config.vm.network "private_network", type: "dhcp"
+  # Configure an IP and shared folders
+  config.vm.network "public_network", use_dhcp_assigned_default_route: true
   config.vm.synced_folder ".", "/vagrant"#, type: "nfs"
 
   # Provision the machine
