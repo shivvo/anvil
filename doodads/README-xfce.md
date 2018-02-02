@@ -6,12 +6,12 @@ In case you need your LED to have a full desktop environment, the Ansible playbo
 
 ## Install
 
-1. In your LED's Vagrantfile, there is a multiline-commented block of code with the comment `# Enable XFCE`. Uncomment this code.
-   * Multiline comments in Ruby (a Vagrantfile's language) have the for
+1. In your LED's Vagrantfile, there is a line of code `vb.gui = true` that is commented. Uncomment this code.
    ```
-   =begin
-   # ... sample text ...
-   =end
+   ...
+   # Enable GUI
+   vb.gui = true
+   ...
    ```
-   * It should suffice to remove `=begin` and `=end`
-3. Run `vagrant up` to setup an LED with a graphical desktop environment. Your LED should now pop up as a Virtualbox window.
+2. In the Ansible playbook, under `feature_enabled`, change `xfce`'s value to `yes`.
+4. Run `vagrant up` to setup an LED with a graphical desktop environment. Your LED should now pop up as a Virtualbox window.
