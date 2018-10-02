@@ -1,0 +1,9 @@
+[submodule "roles/docker"]
+	path = roles/docker
+	url = https://github.com/geerlingguy/ansible-role-docker
+[submodule "roles/java"]
+	path = roles/java
+	url = https://github.com/geerlingguy/ansible-role-java
+[submodule "roles/nodejs"]
+	path = roles/nodejs
+	url = https://github.com/geerlingguy/ansible-role-nodejs

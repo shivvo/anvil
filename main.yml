@@ -1,0 +1,48 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: False
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python)
+
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  vars:
+    java_packages:
+    - openjdk-11-jdk
+    java_home: "/usr/lib/jvm/java-11-openjdk-amd64"
+    needed_packages:
+      # Git
+      - git
+      # C++ build and debug
+      - build-essential
+      - cmake
+      - valgrind
+      # Python 2
+      - python
+      - python-pip
+      - python-dev
+      # Python 3
+      - python3
+      - python3-pip
+      - python3-dev
+      # X11 Forwarding
+      - xauth
+      - gnome-terminal
+      - openssh-server
+  tasks:
+    - name: install docker
+      import_role:
+        name: docker
+    - name: install java
+      import_role:
+        name: java
+    - name: install nodejs
+      import_role:
+        name: nodejs
+    - name: install packages
+      apt:
+        name: "{{ needed_packages }}"
+        state: present

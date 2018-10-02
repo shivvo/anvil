@@ -1,16 +1,16 @@
-# Linux Environments for Development
+# Anvil
 
-**Work in progress** This repository will be updated with useful features as time permits. Any and all feedback is appreciated.
+Anvil is a tool to boot up Ubuntu 18.04 boxes with useful utilities preinstalled. This can be for coursework, for a side project, or as a base template for building more complicated Linux boxes. It is designed to primarily alleviate pains with Linux-based development on Windows 10.
 
 Often times, developers would like to easily access a Unix/Linux environment to use the vast array of tools available on those platforms. The amount of power available from those tools allows developers to learn new things, disseminate knowledge, create useful tools and libraries, and build rock-solid software. Unfortunately, developers with a Windows computer might find it more difficult to access such an environment. There are plenty of solutions out there that can ameliorate the difficulty:
 * VirtualBox - create a virtual machine to use whenever you need a Unix/Linux environment
 * Vagrant - quickly provision a virtual machine to use for development
 * Cygwin - a collection of GNU and open source tools which provide functionality similar to a Linux distribution, plus a POSIX emulation layer
-* Windows Subsystem for Linux (Bash on Windows) - an implementation of Linux syscalls by Microsoft in order to run a full Linux bash
+* Windows Subsystem for Linux (WSL) - an implementation of Linux syscalls by Microsoft in order to run a full Linux bash
 
-Each of these options has pros and cons, and probably the most preferred option is Bash on Windows. The danger, however, is that since it's a work-in-progress by Microsoft, there's always a chance that it won't have the functionality a developer might need - simply because the Linux syscall hasn't been implemented yet. 
+Each of these options has pros and cons, and probably the most preferred option is WSL. The danger, however, is that since it's a work-in-progress by Microsoft, there's always a chance that it won't have the functionality a developer might need - simply because the Linux syscall hasn't been implemented yet. 
 
-This project uses Vagrant to build Linux Environments for Development (LEDs) for Windows 10 users and makes use of other open source tools to create a smooth workflow. It's streamlined for a workflow where:
+This project uses Vagrant to build Linux boxes for Windows 10 users and makes use of other open source tools to create a smooth workflow. It's streamlined for a workflow where:
 * the user writes code using a text editor directly on Windows
 * the user can use Linux tools inside Vagrant to compile their code or perform other tasks
 
@@ -34,35 +34,30 @@ VirtualBox and Vagrant together build virtual machines where fine-tuning develop
 3. Open your terminal and run the following
    ```
    vagrant plugin install vagrant-vbguest
-   vagrant plugin install vagrant-ansible-local
    ```
 4. Clone this repository
 5. `cd` into the repository and run the following commands:
    ```
+   git submodule init --recursive
+   git submodule update --recursive
    vagrant up
    vagrant reload
    ```
+
 ## How do I use this?
 
-After completing steps 1 - 3 of the install process, you can repeat steps 4 and 5 as often as you'd like to setup a new LED for a new project.
+After completing steps 1 - 3 of the install process, you can repeat steps 4 and 5 as often as you'd like to setup a new Linux for a new project.
 
-Once the LED is fully provisioned, simply `vagrant ssh` and use the machine as you please. If you would like to have files on your system available to the VM, drop them into the LED's folder - the directory is automatically shared inside the LED at the **/vagrant** folder.
+Once the Linux box is fully provisioned, simply `vagrant ssh` and use the machine as you please. If you would like to have files on your system available to the VM, drop them into the project root - the directory is automatically shared inside the Linux at the **/vagrant** folder.
 
 ## What comes with it?
 
-The Ansible playbook used to provision the LED can install several build tools, version control tools, and utilities. Not all of them are enabled, but can be by enabling the feature under the `feature_enabled` section of the playbook. By default, the Ansible playbook:
-
-* updates package sources and upgrades installed packages
-* sets up desktop forwarding and installs GNOME Terminal
-* installs commonly used build tools (`build-essential`, `cmake`, etc.)
-* installs commonly used version control tools (`git`, etc.)
-* installs Python 2, Python 3, and Java
-
-Some of the disabled tasks in the `main.yml` playbook can install:
-* Node.js 8 and NPM, with Nuclide support
-* OCaml and OPAM
-* XFCE desktop environment with GDM login manager
-
-## Doodads
-
-Check out the [doodads](doodads) folder to see what else your LED can do!
+The Ansible playbook used to provision the Linux box installs the following utilities:
+* Git
+* C++ build and debug tools
+* Java
+* Node.js
+* Python 2
+* Python 3
+* Docker
+* X11 Forwarding
