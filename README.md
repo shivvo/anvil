@@ -38,8 +38,7 @@ VirtualBox and Vagrant together build virtual machines where fine-tuning develop
 4. Clone this repository
 5. `cd` into the repository and run the following commands:
    ```
-   git submodule init --recursive
-   git submodule update --recursive
+   git submodule update --init --recursive
    vagrant up
    vagrant reload
    ```
