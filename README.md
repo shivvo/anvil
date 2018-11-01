@@ -14,13 +14,13 @@ This project uses Vagrant to build Linux boxes for Windows 10 users and makes us
 * the user writes code using a text editor directly on Windows
 * the user can use Linux tools inside Vagrant to compile their code or perform other tasks
 
-These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should work on Windows 7, 8,  8.1 and 10. Known differences have been accumulated in the **Install** section, based off of user feedback. In addition, LEDs can satisfy macOS/OS X users who are looking for something similar to what this offers.
+These goals are based off my experience writing side projects and as an undergrad at Cornell University, where some courses and project teams are, by nature, not geared towards Windows 10 users. Since this is based off of Vagrant, this solution should work on Windows 7, 8,  8.1 and 10. Known differences have been accumulated in the **Install** section, based off of user feedback. In addition, Anvil can satisfy macOS/OS X users who are looking for something similar to what this offers.
 
 ## What does this add?
 
 This project adds (at minimum) to following to your Windows computer:
-* VirtualBox - for running your LED inside a virtual machine
-* Vagrant - to provision your LED and manage some startup tasks
+* VirtualBox - for running your Linux inside a virtual machine
+* Vagrant - to provision your Linux and manage some startup tasks
 
 VirtualBox and Vagrant together build virtual machines where fine-tuning development environments can be kept separate from your main operating system install.
 
