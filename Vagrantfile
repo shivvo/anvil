@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Configure an IP and shared folders
-  config.vm.network "public_network", use_dhcp_assigned_default_route: true
+  config.vm.network "private_network", type: "dhcp"
   config.vm.synced_folder ".", "/vagrant"
 
   # Provision the VM to run Ansible
@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
     pip3 install ansible
     cd /vagrant
     ansible-playbook main.yml
+    ansible-playbook test.yml
   SHELL
 
   # Configure SSH for X11 forwarding

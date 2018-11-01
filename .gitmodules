@@ -7,3 +7,6 @@
 [submodule "roles/nodejs"]
 	path = roles/nodejs
 	url = https://github.com/geerlingguy/ansible-role-nodejs
+[submodule "roles/sudoers"]
+	path = roles/sudoers
+	url = https://github.com/shivvo/sudoers.git
