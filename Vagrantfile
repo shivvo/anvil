@@ -13,7 +13,10 @@ Vagrant.configure("2") do |config|
 
   # Configure an IP and shared folders
   config.vm.network "private_network", type: "dhcp"
+  #config.vm.network "public_network", use_dhcp_assigned_default_route: true
   config.vm.synced_folder ".", "/vagrant"
+  #config.vm.network :forwarded_port, guest: 22, host: 2222, host_ip: "0.0.0.0", id: "ssh", auto_correct: true
+
 
   # Provision the VM to run Ansible
   config.vm.provision "shell", inline: <<-SHELL
